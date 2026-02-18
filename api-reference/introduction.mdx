@@ -22,7 +22,17 @@ There are two ways to build API documentation: [OpenAPI](https://mintlify.com/do
 
 ## Authentication
 
-All API endpoints are authenticated using Bearer tokens and picked up from the specification file.
+All endpoints require a Bearer token.
+
+Include your API key in the `Authorization` header for every request:
+
+```http
+Authorization: Bearer YOUR_API_KEY
+```
+
+If the token is missing or invalid, the API returns `401 Unauthorized`.
+
+This requirement is defined in the OpenAPI spec and automatically applied to the documented endpoints:
 
 ```json
 "security": [
