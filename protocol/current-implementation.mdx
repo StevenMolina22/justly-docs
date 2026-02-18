@@ -1,0 +1,148 @@
+---
+title: "Current Implementation"
+description: "The following section describes the scope of the current MVP implementation. Other sections of the documentation describe the full Justly protocol design b"
+---
+
+The following section describes the scope of the current MVP implementation. Other sections of the documentation describe the full Justly protocol design beyond the current implementation.
+
+#### Scope
+
+The current implementation focuses on validating the core mechanics of Justly:
+
+* Human juries
+* Economic incentives based on game theory
+* Automated on-chain execution
+* Fast and reliable dispute resolution for low-to-medium value conflicts
+
+All features outside this scope are intentionally excluded from the MVP and will be introduced in future phases.
+
+***
+
+#### Supported Dispute Type
+
+**Public Adversarial Dispute**
+
+The MVP supports **public adversarial disputes** between two parties:
+
+* **Claimer**: the party initiating the dispute
+* **Defender**: the counterparty
+
+Both parties:
+
+* submit evidence,
+* stake funds,
+* and accept the outcome enforced by the protocol.
+
+The dispute is resolved by a group of anonymous human jurors.
+
+***
+
+#### Dispute Lifecycle
+
+Each dispute follows a deterministic, on-chain lifecycle:
+
+1. **Dispute Creation**\
+   A dispute is created by the claimer, specifying the counterparty and dispute parameters.
+2. **Funding & Evidence Submission**\
+   Both parties deposit the required stake and submit evidence (off-chain, referenced on-chain).
+3. **Juror Assignment**\
+   Jurors are selected and assigned to the dispute.
+4. **Commit Phase**\
+   Jurors commit their votes using a commit–reveal scheme.
+5. **Reveal Phase**\
+   Jurors reveal their votes.
+6. **Resolution & Execution**\
+   The protocol determines the winning side and automatically executes:
+   * fund redistribution,
+   * juror rewards,
+   * and penalties.
+
+Current implementation: once executed, the outcome is final.
+Roadmap priority: add appeal rounds as a first-class escalation mechanism.
+
+***
+
+#### Jurors
+
+* Jurors are human participants selected through protocol-defined assignment.
+* Identity and anti-Sybil layers are part of the broader roadmap.
+* Jurors are pseudonymous to disputing parties.
+* Jurors must stake funds to participate.
+
+***
+
+#### Matchmaking
+
+Justly uses coordination mechanisms to improve liveness and operational reliability. This coordination is designed to:
+
+* reduce stalled or abandoned disputes,
+* improve timing predictability for platforms and users,
+* and adapt to available juror liquidity.
+
+Juror selection remains randomized and independent, and outcome execution remains on-chain.
+
+Operational timing is most predictable when juror liquidity is healthy in the relevant court/category.
+Longer windows remain in place as safety buffers for periods of lower participation.
+
+***
+
+#### Voting & Security
+
+* Voting is executed **fully on-chain**.
+* A **commit–reveal scheme** is used to prevent vote manipulation.
+* Roadmap: integrate Shutter's API to support encrypted commit–reveal with automatic reveal.
+* All state transitions and outcomes are verifiable on-chain.
+
+***
+
+#### Tiers
+
+Roadmap: Justly introduces standardized dispute tiers.
+
+Current implementation: disputes are configured through courts/categories and dispute parameters.
+
+Each tier defines:
+
+* number of jurors,
+* juror stake requirements,
+* party stake requirements,
+* fixed fees and protocol fees.
+
+Tiers allow the protocol to support different levels of dispute complexity and economic risk while maintaining predictable resolution behavior.
+
+***
+
+#### Economics
+
+* Both disputing parties stake funds to participate.
+* Jurors stake funds to vote.
+* Jurors who vote coherently are rewarded.
+* Jurors who vote against the final outcome lose their stake.
+* The protocol charges a fixed fee per dispute and a percentage of the losing juror pool.
+
+All economic flows are enforced automatically by smart contracts.
+
+***
+
+#### Limitations of the Current Implementation
+
+The following features are **not included** in the current implementation:
+
+* Appeals or dispute escalation
+* Private disputes
+* Rating or decision-based disputes
+* Automatic reveal via Shutter API integration
+
+These features are part of the Justly protocol design and will be introduced in future phases.
+
+***
+
+#### Design Philosophy
+
+The current implementation prioritizes:
+
+* correctness over completeness,
+* reliability
+* and enforceable outcomes over subjective mediation.
+
+This approach allows Justly to validate its core assumptions while preserving a clear path toward progressive decentralization and additional dispute types.

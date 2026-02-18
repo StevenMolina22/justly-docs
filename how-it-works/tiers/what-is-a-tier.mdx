@@ -1,0 +1,79 @@
+---
+title: "What is a Tier"
+description: "A tier defines the security level, cost, and robustness of a dispute in Justly."
+---
+
+A **tier** defines the **security level, cost, and robustness** of a dispute in Justly.
+
+In the current implementation, the same goals are achieved through configurable courts/categories.
+Standardized tier profiles are part of the protocol roadmap.
+
+Tiers allow the protocol to adapt to different types of conflicts by balancing:
+
+* resolution speed,
+* required level of trust,
+* and the economic risk assumed by both parties and jurors.
+
+Each dispute is executed within a specific tier, and all rules of the resolution process are determined by that tier.
+
+***
+
+### What Changes Between Tiers
+
+#### 1. Number of Jurors
+
+Each tier defines how many human jurors participate in resolving a dispute.
+
+* Lower tiers use fewer jurors, enabling faster and lower-cost resolutions.
+* Higher tiers use more jurors, increasing diversity of judgment and reducing the likelihood of biased outcomes.
+
+A higher number of jurors increases the robustness of the result against individual errors or adversarial behavior.
+
+***
+
+#### 2. Stakes
+
+Tiers establish the **required stake amounts** for both:
+
+* the parties involved in the dispute (claimer and defender),
+* and the jurors participating in the vote.
+
+Higher stakes:
+
+* increase the cost of malicious behavior,
+* raise the economic commitment of participants,
+* and better align incentives when the value or complexity of the dispute is higher.
+
+Stake determines economic exposure and incentives for participation.
+
+***
+
+#### 3. Security Level
+
+The security level of a dispute increases as the tier becomes higher.
+
+This is driven by the combination of:
+
+* a larger number of jurors,
+* higher economic stakes,
+* and a greater total cost required to manipulate the outcome.
+
+Together, these factors make higher tiers more suitable for:
+
+* higher-value disputes,
+* more complex cases,
+* or situations where an additional level of confidence is required.
+
+***
+
+### Tier System Design
+
+Tiers do not exist to segment users, but to **offer security options proportional to the risk of a given conflict**.
+
+In the current implementation:
+
+* tiers are **fixed and predefined by the protocol**,
+* all disputes within the same tier follow exactly the same rules,
+* and outcomes are executed automatically and verifiably on-chain.
+
+This design ensures predictable behavior for both individual users and platforms integrating Justly.

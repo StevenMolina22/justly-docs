@@ -1,0 +1,87 @@
+---
+title: "Dispute Types"
+description: "Justly supports multiple types of human judgment, depending on the nature of the conflict or evaluation being performed."
+---
+
+Justly supports multiple types of human judgment, depending on the nature of the conflict or evaluation being performed.
+
+Each dispute type defines:
+
+* how participants interact,
+* how jurors evaluate information,
+* and how outcomes are enforced on-chain.
+
+Not all dispute types are available in the current implementation.\
+This section describes the **full design of the protocol** and clearly indicates the status of each type.
+
+| Types               | Purpose                                                      | Outcome            | Status  |
+| ------------------- | ------------------------------------------------------------ | ------------------ | ------- |
+| Adversarial Dispute | *Resolve conflicts between two parties*                       | *Winner/Loser*     | Live    |
+| Decision Dispute    | *Validate proposals or decisions*                             | *Accept/Reject*    | Planned |
+| Rating Evaluation   | *Evaluate quality or contribution*                            | *Aggregated Score* | Planned |
+
+### Adversarial Dispute
+
+**Status:** Live (Current Implementation)
+
+Resolves conflicts between two opposing parties: a **Claimer** and a **Defender**.
+
+Jurors evaluate evidence submitted by both sides and vote on a binding outcome that is enforced on-chain.
+
+Used for:
+
+* marketplaces,
+* freelancer and contractor platforms,
+* fintech and payment disputes,
+* peer-to-peer conflicts.
+
+→ *See: Adversarial Dispute*
+
+***
+
+### Decision Dispute
+
+**Status:** Planned
+
+Designed for collective decision-making rather than conflict resolution.
+
+Jurors evaluate whether a proposal or action should be accepted or rejected according to predefined rules.
+
+Used for:
+
+* governance processes,
+* protocol-level decisions,
+* structured human validation.
+
+→ *See: Decision Dispute*
+
+***
+
+### Rating Evaluation
+
+**Status:** Planned
+
+A collective evaluation mechanism based on structured numerical input rather than binary outcomes.
+
+Jurors provide ratings that are aggregated to measure quality, performance, or contribution.
+
+Used for:
+
+* open-source contribution evaluation,
+* content moderation,
+* quality and performance scoring,
+* reputation systems.
+
+→ *See: Rating Evaluation*
+
+<Note>
+Some dispute types may support additional evaluation rounds under stricter conditions.
+</Note>
+
+***
+
+### Extensibility
+
+Justly is designed as a modular protocol.
+
+Additional dispute types and variations can be introduced over time without changing the core execution or incentive model.

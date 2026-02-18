@@ -1,0 +1,151 @@
+---
+title: "Security Model"
+description: "Justly is designed as a cryptoeconomic dispute resolution protocol , where security emerges from incentive alignment, economic cost, and transparent execut"
+---
+
+Justly is designed as a **cryptoeconomic dispute resolution protocol**, where security emerges from incentive alignment, economic cost, and transparent execution — not from authority or legal enforcement.
+
+This section describes the **security assumptions, guarantees, and limits** of the protocol.
+
+***
+
+### Security Philosophy
+
+Justly does not attempt to determine absolute truth or legal correctness.
+
+Instead, it is designed to ensure that:
+
+* dishonest behavior is economically costly,
+* coordinated manipulation is difficult and expensive,
+* and honest participation is the most rational strategy over time.
+
+Security in Justly is achieved through **game theory, staking mechanics, and protocol-enforced execution**, not through trust in any centralized actor.
+
+***
+
+### Threats Justly Is Designed to Mitigate
+
+Justly is explicitly designed to mitigate the following classes of attacks:
+
+#### Sybil Attacks
+
+Mitigated through:
+
+* economic staking requirements,
+* proof-of-humanity and identity primitives (where enabled),
+* and cost proportional to participation.
+
+Creating many identities does not grant proportional influence, only proportional risk.
+
+***
+
+#### Vote Manipulation and Collusion
+
+Mitigated through:
+
+* random juror selection,
+* commit–reveal voting,
+* incoherent vote slashing,
+* and tier-based security escalation.
+
+Collusion requires sustained coordination across multiple rounds and jurors, increasing economic exposure.
+
+***
+
+#### Bribery and Coercion
+
+Mitigated through:
+
+* juror anonymity,
+* delayed vote revelation,
+* and lack of pre-commitment visibility.
+
+Bribery becomes unreliable because outcomes cannot be verified before execution.
+
+***
+
+#### Low-Quality or Random Voting
+
+Mitigated through:
+
+* loss of stake for incoherent votes,
+* rewards only for alignment with final outcomes,
+* and long-term negative expectancy for careless behavior.
+
+Jurors who do not evaluate evidence are economically penalized over time.
+
+***
+
+### Incentive Alignment as the Primary Defense
+
+Justly’s primary security mechanism is **incentive alignment**, not identity or reputation alone.
+
+Key properties:
+
+* Jurors are economically exposed to the quality of their decisions.
+* Economic exposure scales risk and reward.
+* Rewards are only distributed to jurors who align with the final outcome.
+
+This structure discourages whales, favors independent judgment, and aligns rational behavior with protocol integrity.
+
+***
+
+### Tier-Based Security Escalation
+
+Justly supports multiple security levels to match guarantees with dispute risk.
+
+Higher security levels provide:
+
+* broader juror participation,
+* higher total economic exposure,
+* and increased resistance to manipulation.
+
+This allows users and integrators to choose a security level proportional to the value and complexity of the dispute.
+
+***
+
+### Appeals as a Security Amplifier
+
+Appeals are a **core security layer** in the Justly design, increasing the cost of incorrect or adversarial outcomes.
+
+In the live contracts today, disputes finalize in a single round once executed.
+Appeals are one of the most urgent roadmap priorities and are designed to be introduced as structured escalation rounds.
+
+Planned appeal rounds:
+
+* increases juror count and economic exposure,
+* re-evaluates the dispute under stricter conditions,
+* and incentivizes early honest voting.
+
+Appeals are designed to converge outcomes toward coherent judgments without granting unilateral power to any party.
+
+***
+
+### Limits of the System
+
+Justly makes the following guarantees:
+
+* outcomes are enforced exactly as defined,
+* rules are transparent and immutable,
+* execution is on-chain and verifiable.
+
+Justly does **not** guarantee:
+
+* legal correctness,
+* absolute truth,
+* or immunity from all forms of coordination under extreme conditions.
+
+Human judgment is inherently probabilistic. Justly guarantees that **dishonesty is costly**, not impossible.
+
+***
+
+### Progressive Security
+
+Security in Justly increases through:
+
+* higher security levels,
+* appeals,
+* identity primitives,
+* and protocol adoption scale.
+
+The protocol is designed to remain secure under realistic conditions and to strengthen as participation grows.

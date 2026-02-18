@@ -1,0 +1,25 @@
+---
+title: "Dispute Tiers"
+description: "Each tier defines a fixed set of parameters that determine the security level , economic cost , and robustness of the dispute resolution process."
+---
+
+Each tier defines a fixed set of parameters that determine the **security level**, **economic cost**, and **robustness** of the dispute resolution process.
+
+| Tier       | Jurors   | Stake per Juror | Stake per Party (Claimer / Defender) | Fixed Fee\* | Security Level |
+| ---------- | -------- | --------------- | ------------------------------------ | ----------- | -------------- |
+| **Tier 1** | 3 jurors | 1 USD           | 4 USD                                | 3 USD       | Low            |
+| **Tier 2** | 5 jurors | 5 USD           | 10 USD                               | 5 USD       | Medium         |
+| **Tier 3** | 7 jurors | 10 USD          | 17 USD                               | 7 USD       | High           |
+| **Tier 4** | 9 jurors | 20 USD          | 29 USD                               | 9 USD       | Very High      |
+
+\* **Fixed Fee:** a fixed amount distributed among jurors who vote coherently. This fee is taken from the stake deposited by the parties involved in the dispute.
+
+***
+
+#### **Important Notes**
+
+* All values are expressed in USD (or equivalent stablecoins).
+* Tier values are target profiles for standardized configurations.
+* Live deployments may use court/category configurations while preserving the same economic principles.
+* Higher tiers increase the cost of attacks, the diversity of judgment, and the overall robustness of the outcome.
+* Selecting a tier allows the parties to choose a security level proportional to the value or complexity of the dispute.

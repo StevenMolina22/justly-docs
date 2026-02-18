@@ -1,0 +1,266 @@
+---
+title: "Code Quality Evaluation and OSS Reward Distribution"
+description: "Open source projects depend on external contributors.\ But evaluating contributions fairly is one of the hardest unsolved problems in OSS."
+---
+
+<Note>
+Status: Planned (*Rating-based disputes under design*)
+</Note>
+
+#### The real problem in open-source ecosystems
+
+Open-source projects depend on external contributors.\
+But **evaluating contributions fairly** is one of the hardest unsolved problems in OSS.
+
+Most platforms struggle to answer simple but critical questions:
+
+* Was this pull request actually good?
+* Did it improve the project long-term?
+* How much should this contribution be rewarded?
+* Should this code be merged, revised, or rejected?
+
+At scale, these decisions become inconsistent, subjective, and conflict-prone.
+
+***
+
+#### Why current evaluation methods fail
+
+**1. Quantitative metrics don’t measure quality**
+
+Common signals like:
+
+* lines of code,
+* number of commits,
+* issue count,
+* activity frequency,
+
+**do not reflect real value**.
+
+A small, well-designed fix can be worth more than hundreds of lines of code.
+
+***
+
+**2. Maintainer-only evaluation does not scale**
+
+Relying solely on maintainers:
+
+* creates bottlenecks,
+* introduces bias,
+* burns out core teams,
+* discourages contributors.
+
+In many projects, maintainers become:
+
+* judges,
+* gatekeepers,
+* and conflict managers.
+
+This is unsustainable.
+
+***
+
+**3. Pure AI-based evaluation breaks in real-world codebases**
+
+Some platforms experimented with AI-based PR evaluation.
+
+A real example:
+
+* Platforms like **OnlyDust** tested automated or AI-assisted evaluation of contributions.
+* While useful for surface-level analysis, these systems failed when:
+  * evaluating smart contracts,
+  * judging protocol-level logic,
+  * understanding security implications,
+  * reviewing unfamiliar languages or paradigms.
+
+AI models:
+
+* misjudge intent,
+* misunderstand context,
+* fail at domain-specific reasoning,
+* and confidently score incorrect or risky code.
+
+This creates **false signals** and undermines trust.
+
+***
+
+#### Why human judgment is unavoidable
+
+Code quality is not just correctness.
+
+It includes:
+
+* architectural fit,
+* security assumptions,
+* readability,
+* long-term maintainability,
+* alignment with project goals.
+
+These dimensions require **human judgment**.
+
+But centralized human judgment does not scale either.
+
+***
+
+#### The missing layer: decentralized, incentivized code evaluation
+
+Justly introduces a new primitive:\
+**distributed human evaluation with economic incentives**.
+
+Instead of:
+
+* one maintainer deciding,
+* or a black-box AI scoring,
+
+Justly uses:
+
+* multiple independent reviewers,
+* clear evaluation criteria,
+* economic stakes to discourage bad judgments.
+
+***
+
+#### How Justly works for code evaluation
+
+Typical flow:
+
+1. A contributor submits a pull request.
+2. The PR enters an evaluation phase.
+3. Jurors stake stablecoins (e.g. USDC) to participate.
+4. Jurors review:
+   * code quality,
+   * correctness,
+   * security implications,
+   * adherence to project standards.
+5. Each juror assigns a quality score or verdict.
+6. Scores are aggregated.
+7. Outcomes are executed automatically:
+   * merge,
+   * request changes,
+   * reject,
+   * distribute rewards.
+
+Poor or dishonest evaluations are economically penalized.
+
+***
+
+#### Example: smart contract contribution
+
+**Scenario**
+
+* A contributor submits a smart contract PR.
+* The code compiles and passes tests.
+* An AI reviewer gives it a high score.
+* Maintainers feel unsure about edge cases and security assumptions.
+
+With Justly:
+
+* Jurors with relevant expertise review the contract.
+* They evaluate:
+  * attack surfaces,
+  * economic exploits,
+  * logic soundness.
+* The PR receives a weighted quality score.
+* Rewards and merge decisions reflect real risk and value.
+
+This avoids:
+
+* blind trust in automation,
+* single-point human failure.
+
+***
+
+#### Example: OSS reward distribution
+
+**Problem**
+
+An OSS platform has a fixed monthly reward pool.\
+Multiple contributors submit PRs of varying quality.
+
+Without Justly:
+
+* rewards are distributed arbitrarily,
+* maintainers decide behind closed doors,
+* contributors feel underpaid or ignored.
+
+With Justly:
+
+* each merged PR is scored by jurors,
+* rewards scale with contribution quality,
+* incentives align with long-term project health.
+
+***
+
+#### Why stablecoin staking matters
+
+Using stablecoins (like USDC):
+
+* removes token volatility,
+* avoids speculation,
+* keeps incentives neutral.
+
+Jurors are rewarded for:
+
+* accuracy,
+* alignment with consensus,
+* honest evaluation.
+
+Not for hype or volume.
+
+***
+
+#### Benefits for OSS platforms
+
+**For maintainers**
+
+* Reduced evaluation burden.
+* Less conflict with contributors.
+* More consistent decisions.
+* Better security outcomes.
+
+**For contributors**
+
+* Fair recognition of work.
+* Transparent evaluation.
+* Clear incentive alignment.
+
+**For ecosystems**
+
+* Higher code quality.
+* Reduced gaming of metrics.
+* Stronger long-term sustainability.
+
+***
+
+#### Beyond pull requests
+
+The same mechanism applies to:
+
+* issue prioritization,
+* bug severity scoring,
+* grant allocation,
+* retroactive funding,
+* roadmap impact evaluation.
+
+Any process that requires **judging quality, not quantity**.
+
+***
+
+#### The takeaway
+
+Open-source fails when:
+
+* effort is rewarded instead of impact,
+* evaluation is opaque,
+* incentives are misaligned.
+
+Justly transforms code evaluation into:
+
+* a transparent process,
+* backed by economic accountability,
+* scalable across ecosystems.
+
+***
+
+*Code quality evaluation is expected to leverage **rating-based disputes** and may utilize **Tier 2 or higher** to ensure sufficient diversity of judgment.*
+
+See [Dispute tiers](/how-it-works/tiers/dispute-tiers).

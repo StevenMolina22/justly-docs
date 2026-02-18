@@ -1,0 +1,177 @@
+---
+title: "Rating Evaluation"
+description: "Not all judgments are about determining a winner."
+---
+
+Not all judgments are about determining a winner.
+
+Some problems require **measuring quality, performance, or contribution** rather than resolving a conflict.
+
+**Rating Evaluation** is Justly’s primitive for these cases: a structured, incentive-aligned system for collective human evaluation.
+
+***
+
+### Overview
+
+Rating Evaluation enables **collective assessment using numerical input**, rather than binary outcomes.
+
+Instead of voting for a winning party, jurors provide **ratings on a predefined scale** (for example, 1-5).\
+These ratings are aggregated using robust statistical methods to produce a final evaluation.
+
+The result is enforced or recorded automatically on-chain.
+
+Rating Evaluation is designed to support **subjective or qualitative judgment** while preserving incentive alignment and resistance to manipulation.
+
+***
+
+### When to use Rating Evaluation
+
+Rating Evaluation is suitable when:
+
+* there is no clear winner or loser,
+* quality or contribution must be assessed,
+* or outcomes exist on a spectrum rather than as binary choices.
+
+Typical use cases include:
+
+* open-source contribution evaluation and reward distribution,
+* content moderation and severity assessment,
+* marketplace quality scoring,
+* performance and deliverable evaluation,
+* reputation and feedback systems.
+
+***
+
+### Participants
+
+#### Subject
+
+The subject is the entity being evaluated.
+
+This may be:
+
+* a contribution,
+* a piece of content,
+* a deliverable,
+* or a completed action.
+
+The subject does not participate in voting.
+
+***
+
+#### Jurors
+
+Independent participants selected through randomized assignment.
+
+Jurors:
+
+* review the submitted evidence,
+* assign ratings according to the defined scale,
+* and are economically incentivized to rate coherently.
+
+Jurors do not coordinate directly and have no privileged information.
+
+***
+
+### Evaluation Method
+
+Jurors submit ratings on a predefined numerical scale.
+
+The protocol aggregates these ratings using a **median-based approach**, which:
+
+* reduces sensitivity to outliers,
+* penalizes extreme or incoherent inputs,
+* and provides robustness against individual manipulation.
+
+Incentives are adjusted based on **distance from the aggregated result**, rather than absolute correctness.
+
+This creates a system where jurors are rewarded for **coherent judgment**, not for guessing an objective “truth”.
+
+***
+
+### Incentive Design
+
+Rating Evaluation uses **partial incentive adjustment** rather than full slashing.
+
+Jurors whose ratings are closer to the aggregated result retain more of their stake.\
+Jurors whose ratings deviate significantly may lose a portion of it.
+
+This design:
+
+* discourages extreme or bad-faith ratings,
+* tolerates reasonable disagreement,
+* and avoids punishing minor deviations harshly.
+
+***
+
+### Generalization Across Domains
+
+Rating Evaluation is designed as a **general evaluation engine**, not a domain-specific tool.
+
+The protocol separates:
+
+* the **rating engine** (aggregation and incentive logic),
+* from the **evidence schema** (what is being evaluated and how).
+
+This allows the same evaluation mechanism to be reused across multiple verticals, with domain-specific evidence formats defined at the integration layer.
+
+***
+
+### Dispute Flow (High Level)
+
+1. An evaluation request is created.
+2. Evidence related to the subject is submitted.
+3. Jurors are assigned to the evaluation.
+4. Jurors submit numerical ratings.
+5. Ratings are aggregated and incentives adjusted.
+6. The final evaluation is recorded or executed on-chain.
+
+All steps follow predefined rules enforced by smart contracts.
+
+***
+
+### Guarantees
+
+Rating Evaluation in Justly provides:
+
+* **Robust aggregation**: resistance to outliers through median-based methods.
+* **Incentive alignment**: partial slashing discourages manipulation.
+* **Flexibility**: applicable across multiple evaluation domains.
+* **Deterministic execution**: results enforced or recorded on-chain.
+
+Justly does not define what “quality” means; it enforces how collective judgment is aggregated and incentivized.
+
+#### Reward Calculation
+
+To ensure the system is both fair and resistant to manipulation, Justly utilizes a linear loss function based on distance. Each juror's reward multiplier is determined by comparing their individual rating to the final aggregated result (the median).
+
+The applied formula is:
+
+$$
+S\_i = 1 - \left( \frac{|r\_i - \tilde{x}|}{D\_{max}} \right)
+$$
+
+Where:
+
+* $$S\_i$$: Juror’s reward score (between 0 and 1).
+* $$|r\_i - \tilde{x}|$$: The absolute distance between the juror’s rating and the median.
+* $$D\_{max}$$: The maximum possible distance within the scale (e.g., 4 on a 1-5 scale).
+
+**Why this design?**
+
+This incentive mechanism was selected for two fundamental reasons:
+
+1. Fairness for Subjective Judgment:
+
+   Unlike binary dispute resolution systems - where a minor deviation can lead to a total loss of stake - this formula recognizes that quality assessment is nuanced. If the majority rates a deliverable as a 4 and you rate it as a 3, the system does not treat you as a malicious actor, but as an evaluator with a slightly different perspective. You receive a partial reward (75% on a 1-5 scale) rather than being severely penalized.
+2. Resistance to Collusion and Outliers:
+
+   By using the median as the system's anchor, the protocol remains extremely robust. Jurors are economically incentivized to seek the "honest consensus," as moving away from what the majority perceives as reasonable results in a proportional financial loss. This compels jurors to be diligent: the more erratic or extreme their rating is relative to the collective judgment, the lower their profit will be.
+
+***
+
+### Status
+
+**Planned**
+
+Rating Evaluation is part of the core protocol design and will be introduced in a future implementation phase.

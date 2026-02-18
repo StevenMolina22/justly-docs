@@ -1,0 +1,314 @@
+---
+title: "Frequently Asked Questions"
+description: "This page answers common questions about Justly, how it works, and what guarantees it provides."
+---
+
+This page answers common questions about Justly, how it works, and what guarantees it provides.
+
+Everything you need to know about Justly. If you have more questions, join the Justly community on Telegram: [Official links](https://t.me/justlycommunity).
+
+### General
+
+<details>
+
+<summary>Can you really trust a decision made by anonymous jurors?</summary>
+
+Justly extends the same incentive logic used in cryptoeconomic systems to human judgment.
+
+Jurors are:
+
+* **independent**,
+* **randomly assigned**,
+* and **economically incentivized** to vote coherently.
+
+Because outcomes affect real value, the system is designed so that **dishonest or low-effort behavior is costly**, while coherent behavior is rewarded.
+
+</details>
+
+<details>
+
+<summary>Is Justly a court or a legal arbitrator?</summary>
+
+No. Justly is **neutral dispute resolution infrastructure**.
+
+It is not a court and does not provide legal advice. It enforces outcomes based on protocol rules and smart contract execution.
+
+(See: *Legal & Compliance Considerations*)
+
+</details>
+
+<details>
+
+<summary>What kinds of disputes is Justly built for?</summary>
+
+Justly is optimized for **micro-to-medium disputes** in digital platforms, where:
+
+* disputes are frequent,
+* amounts are not large enough for traditional legal processes,
+* and fast resolution matters.
+
+Examples include marketplaces, freelance platforms, fintech/payment conflicts, governance validation, and quality evaluation.
+
+(See: *Use Cases*)
+
+</details>
+
+<details>
+
+<summary>Is Justly only for Stellar?</summary>
+
+No. Justly is designed to be **chain-agnostic**, although it may prioritize specific ecosystems depending on adoption and integration demand.
+
+</details>
+
+### How Justly Works
+
+<details>
+
+<summary>What is a Tier?</summary>
+
+A tier defines the **security level and economic parameters** of a dispute: number of jurors, required stakes, and overall robustness.
+
+Higher tiers increase the cost of manipulation by combining:
+
+* more jurors,
+* higher stakes,
+* higher total cost to attack.
+
+(See: *What is a Tier*)
+
+</details>
+
+<details>
+
+<summary>How long does a dispute take?</summary>
+
+Resolution time depends on:
+
+* tier (number of jurors),
+* evidence/voting windows,
+* and juror availability.
+
+Justly is designed to keep dispute resolution **predictable and reliable**, prioritizing liveness and completion.
+
+(See: *Dispute Lifecycle*)
+
+</details>
+
+<details>
+
+<summary>What happens after the dispute is resolved?</summary>
+
+Once the dispute is resolved, the outcome is **executed automatically on-chain**:
+
+* funds are redistributed according to the ruling,
+* juror incentives are settled programmatically,
+* and the final state becomes publicly verifiable.
+
+</details>
+
+### Jurors
+
+<details>
+
+<summary>Are jurors anonymous?</summary>
+
+Jurors are pseudonymous participants, but Justly can require **Proof-of-Humanity (PoH)** to prevent sybil attacks.
+
+This means jurors can remain private while still proving they are unique humans.
+
+</details>
+
+<details>
+
+<summary>Why require Proof-of-Humanity (PoH)?</summary>
+
+Without PoH, a malicious actor could create many identities and try to influence outcomes.
+
+PoH increases security by ensuring:
+
+* one human = one juror identity,
+* and the economic cost to manipulate results becomes substantially higher.
+
+</details>
+
+<details>
+
+<summary>Can parties be jurors in their own dispute?</summary>
+
+No. Parties cannot serve as jurors in disputes where they have a direct interest.
+
+This avoids conflicts of interest and preserves neutrality.
+
+</details>
+
+<details>
+
+<summary>What if jurors don’t vote or go inactive?</summary>
+
+Jurors are expected to participate within defined time windows.
+
+Non-participation can result in:
+
+* losing the chance to earn rewards,
+* and protocol-defined penalties depending on the rules of the dispute.
+
+</details>
+
+### Security & Incentives
+
+<details>
+
+<summary>Can someone “whale” attack Justly by staking a lot?</summary>
+
+Stakes affect:
+
+* economic exposure,
+* and rewards/penalties.
+
+Large stakes increase financial exposure, but do not create special control over final execution rules.
+
+(See: *Security Model*)
+
+</details>
+
+<details>
+
+<summary>Can someone bribe jurors?</summary>
+
+Bribery is made difficult by:
+
+* randomized assignment,
+* pseudonymity,
+* and incentive alignment (jurors who vote incoherently are penalized).
+
+Because jurors are not known in advance, targeted bribery becomes harder, and dishonest coordination is economically risky.
+
+(See: *Security Model*)
+
+</details>
+
+<details>
+
+<summary>What prevents sybil attacks?</summary>
+
+Justly mitigates sybil attacks through:
+
+* **Proof-of-Humanity (PoH)** eligibility,
+* randomized juror assignment,
+* and economic penalties for incoherent voting.
+
+(See: *Security Model*)
+
+</details>
+
+<details>
+
+<summary>Can Justly be fully trustless if matchmaking uses a backend?</summary>
+
+Justly can use **backend-assisted matchmaking** to ensure disputes reach the required number of jurors and resolve reliably.
+
+The backend:
+
+* coordinates assignment and timing,
+* but **cannot influence votes, outcomes, or fund execution**.
+
+All rulings and transfers are enforced by smart contracts.
+
+In the long-term, Justly can support multiple modes such as “Turbo” (assisted) and “Pure Randomness” (fully on-chain randomness).
+
+(See: *Security Model*)
+
+</details>
+
+### Appeals
+
+<details>
+
+<summary>Does Justly support appeals?</summary>
+
+Appeals are part of Justly’s protocol design and may be enabled depending on dispute type and implementation phase.
+
+In adversarial disputes, appeal rounds can be opened under stricter conditions to increase robustness and security.
+
+</details>
+
+<details>
+
+<summary>How are appeals funded?</summary>
+
+In adversarial disputes, Justly follows a funding model where:
+
+* the appellant pays the cost to open a new round,
+* while the non-appellant may optionally “match” to preserve upside.
+
+This discourages frivolous appeals while keeping escalation possible when needed.
+
+(See: *Adversarial Dispute*)
+
+</details>
+
+### Integrations
+
+<details>
+
+<summary>Do users need to hold a specific token to use Justly?</summary>
+
+No. Regular users (claimer/defender) do not need to hold a protocol token.
+
+Justly is designed to work with **standard assets (e.g., stablecoins)** used for stakes and payouts.
+
+</details>
+
+<details>
+
+<summary>Do I need the SDK to integrate Justly?</summary>
+
+Not necessarily. Justly can be integrated through direct contract interaction and integration guidelines.
+
+The SDK is planned to simplify and standardize integrations over time.
+
+(See: *Current Implementation*)
+
+</details>
+
+<details>
+
+<summary>Who is responsible for compliance when integrating Justly?</summary>
+
+Compliance depends on the integrating platform, jurisdiction, and transaction type.
+
+Justly is neutral infrastructure and can be combined with identity/KYC/AML solutions when required.
+
+(See: *Legal & Compliance Considerations*)
+
+</details>
+
+### Legal & Responsibility
+
+<details>
+
+<summary>Who is responsible if a verdict causes economic loss?</summary>
+
+Justly is provided “as-is”.
+
+Outcomes result from:
+
+* independent human judgment,
+* and protocol-defined rules executed on-chain.
+
+Users and integrators are responsible for determining whether Justly is appropriate for their use case and risk tolerance.
+
+(See: *Legal & Compliance Considerations*)
+
+</details>
+
+<details>
+
+<summary>Are Justly rulings legally binding?</summary>
+
+Justly outcomes are **programmatically binding** because parties opt into on-chain enforcement.
+
+They are not court rulings and do not automatically constitute legal judgments unless an integrator explicitly frames them within a legal agreement at the application layer.
+
+</details>

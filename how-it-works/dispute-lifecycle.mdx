@@ -1,0 +1,116 @@
+---
+title: "Dispute Lifecycle"
+description: "Every dispute in Justly follows a deterministic, transparent lifecycle designed to ensure fairness, incentive alignment, and automatic execution."
+---
+
+Every dispute in Justly follows a deterministic, transparent lifecycle designed to ensure fairness, incentive alignment, and automatic execution.
+
+While specific parameters may vary depending on the tier or dispute type, the overall structure of the process remains consistent across the protocol.
+
+***
+
+#### 1. Dispute Creation
+
+A dispute begins when a party (the **Claimer**) initiates a case against another party (the **Defender**).
+
+At creation time:
+
+* the dispute parameters are defined,
+* the applicable tier is selected,
+* and the dispute becomes available for participation.
+
+From this point forward, the dispute is governed entirely by protocol rules.
+
+***
+
+#### 2. Stake Deposit
+
+Both the Claimer and the Defender are required to deposit the stake defined by the selected tier.
+
+This stake:
+
+* signals commitment to the process,
+* prevents frivolous or spam disputes,
+* and ensures that both parties have economic exposure to the outcome.
+
+If the required stakes are not deposited within the allowed time window, the dispute does not proceed.
+
+***
+
+#### 3. Evidence Submission
+
+Once the dispute is funded, both parties may submit evidence supporting their position.
+
+Evidence is:
+
+* submitted off-chain,
+* cryptographically referenced on-chain,
+* and made available to all assigned jurors.
+
+The protocol does not interpret evidence.\
+It only guarantees that evidence is immutable and equally accessible.
+
+***
+
+#### 4. Juror Assignment
+
+A set of jurors is assigned to the dispute according to the rules defined by the selected tier.
+
+Juror assignment:
+
+* is randomized,
+* is independent from the disputing parties,
+* and ensures the dispute reaches the required number of jurors.
+
+Jurors must deposit their own stake in order to participate.
+
+***
+
+#### 5. Commit Phase
+
+During the commit phase, each juror submits a cryptographic commitment to their vote.
+
+This phase:
+
+* prevents vote copying or coordination,
+* ensures jurors make independent decisions,
+* and protects the integrity of the voting process.
+
+Votes are not visible during this phase.
+
+***
+
+#### 6. Reveal Phase
+
+In the reveal phase, jurors reveal their previously committed votes.
+
+The protocol verifies that each revealed vote matches its original commitment.
+
+Once all required votes are revealed — or the reveal period expires — the dispute moves to resolution.
+
+***
+
+#### 7. Resolution and Execution
+
+After the voting phase concludes, the protocol determines the outcome based on juror votes.
+
+The result is:
+
+* final for the current dispute,
+* enforced automatically by smart contracts,
+* and executed without human intervention.
+
+This includes:
+
+* redistribution of stakes between the parties,
+* rewards and penalties for jurors,
+* and the final settlement of the dispute.
+
+***
+
+#### Finality
+
+In the current implementation, dispute outcomes are final once executed.
+
+Appeals are central to Justly's long-term security model and are one of the most urgent roadmap priorities.
+Future iterations will introduce structured appeal rounds and additional resolution layers.

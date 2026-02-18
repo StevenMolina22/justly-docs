@@ -1,0 +1,177 @@
+---
+title: "Marketplaces (E-commerce, P2P, Services)"
+description: "The real problem (not a theoretical one)"
+---
+
+<Note>
+Status: Live (Public Adversarial Dispute)
+</Note>
+
+The real problem (not a theoretical one)
+
+In any marketplace where buyers and sellers **don’t know each other**, disputes are **not an edge case** — they are a normal part of the system.
+
+Common, real-world examples:
+
+* A buyer says *“the product never arrived”*
+* The seller replies *“it was delivered, here’s the tracking”*
+* A customer pays for a service (design, repair, delivery) and claims it **doesn’t meet the agreement**
+* The provider claims they **did deliver as agreed** and the buyer is requesting an unfair refund
+* A product arrives but:
+  * it doesn’t match the description,
+  * it’s damaged,
+  * or it arrives later than promised
+
+These situations happen **every day**, even on large marketplaces.
+
+***
+
+#### How disputes are handled today (and why this doesn’t scale)
+
+Most marketplaces resolve disputes in roughly the same way:
+
+1. Funds are held by the platform.
+2. The user opens a support ticket.
+3. A support agent:
+   * reads messages,
+   * reviews screenshots,
+   * interprets internal rules.
+4. The platform makes a decision and releases the funds.
+
+This approach creates several structural problems:
+
+* ❌ **The platform acts as judge and party**\
+  It decides over funds it doesn’t own, while its own reputation is at stake.
+* ❌ **High operational costs**\
+  Every dispute requires human time and review.
+* ❌ **Opaque decisions**\
+  Users don’t clearly understand why a decision was made.
+* ❌ **Poor scalability**\
+  More users → more disputes → more support → higher costs.
+
+As a result, many marketplaces:
+
+* limit refunds,
+* systematically favor one side,
+* or simply ban users.
+
+This **breaks trust**.
+
+***
+
+#### The key insight: escrow without arbitration doesn’t work
+
+Many marketplaces rely on an **escrow model**:
+
+* the buyer pays,
+* funds are locked,
+* funds are released if everything goes well.
+
+But when a conflict arises, a critical question appears:
+
+> Who decides who is right?
+
+Without a clear answer:
+
+* funds remain stuck,
+* decisions become arbitrary,
+* escrow loses its purpose.
+
+👉 **Arbitration is what makes escrow work.**
+
+This is exactly the insight Kleros addressed — and what Justly applies in a more modern, fast, and UX-friendly way.
+
+***
+
+#### How Justly solves this for marketplaces
+
+Justly integrates as an **external dispute resolution layer**.
+
+A simple flow:
+
+1. The buyer pays → funds are locked in escrow.
+2. The transaction proceeds normally.
+3. If a conflict arises:
+   * either party can open a dispute via Justly.
+4. Evidence is submitted:
+   * product description,
+   * messages,
+   * receipts,
+   * deliverables.
+5. A group of **independent jurors** evaluates the case.
+6. Jurors vote based on clear rules.
+7. The final ruling:
+   * releases funds to the buyer **or**
+   * releases funds to the seller.
+
+All of this happens:
+
+* without the platform making the decision,
+* without internal human support,
+* with transparent, verifiable rules.
+
+***
+
+#### A concrete (very realistic) example
+
+**Design services marketplace**
+
+* Price: 150 USDC
+* The client claims: *“the design doesn’t meet the agreed scope”*
+* The designer claims: *“I delivered exactly what was requested”*
+
+With Justly:
+
+* Both parties submit:
+  * the original brief,
+  * the delivered design,
+  * the conversation history.
+* Jurors evaluate:
+  * Was the brief respected?
+  * Is the delivered quality reasonable?
+* A vote is taken.
+* Funds are released automatically according to the ruling.
+
+The platform **does not intervene**.
+
+***
+
+#### Clear benefits for the marketplace
+
+**For the platform**
+
+* Lower support costs.
+* Reduced legal exposure.
+* Auditable, consistent decisions.
+* Scalability without added friction.
+
+**For buyers**
+
+* Confidence to pay upfront.
+* Real protection in disputes.
+
+**For sellers**
+
+* Protection against abusive claims.
+* Clear rules from the start.
+
+***
+
+#### Why this matters (strategic importance)
+
+Without fair dispute resolution:
+
+* users lose trust,
+* prices increase to cover risk,
+* or users leave the platform.
+
+With Justly:
+
+* conflict stops being an existential threat,
+* and becomes a normal, solvable part of the system.
+
+***
+
+*Most marketplace disputes are typically resolved using **Tier 1 or Tier 2**, depending on transaction value and platform risk tolerance.*
+
+See [Dispute tiers](/how-it-works/tiers/dispute-tiers).

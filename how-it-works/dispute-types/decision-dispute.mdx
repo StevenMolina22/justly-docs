@@ -1,0 +1,152 @@
+---
+title: "Decision Dispute"
+description: "Not all judgments involve a conflict between two opposing parties."
+---
+
+Not all judgments involve a conflict between two opposing parties.
+
+Some situations require a **collective human decision** to validate whether an action, proposal, or outcome should be accepted or rejected.
+
+**Decision disputes** are designed for these cases.
+
+***
+
+### Overview
+
+A decision dispute enables **structured collective judgment** over a proposal or action.
+
+Instead of resolving a conflict between two parties, jurors evaluate whether a submitted proposal is **valid, acceptable, and well-defined** according to predefined rules.
+
+The outcome is enforced automatically on-chain.
+
+***
+
+### When to use a Decision Dispute
+
+Decision disputes are suitable when:
+
+* no direct adversarial conflict exists,
+* a proposal must be validated by human judgment,
+* or automated rules are insufficient or ambiguous.
+
+Typical use cases include:
+
+* governance and protocol decisions,
+* validation of sensitive actions,
+* structured approval workflows,
+* human review of edge cases.
+
+***
+
+### Participants
+
+#### Proposer
+
+The proposer submits a proposal, action, or decision for evaluation.
+
+The proposer:
+
+* defines the proposal to be evaluated,
+* deposits a **bond**,
+* and accepts the outcome determined by jurors.
+
+The proposer is **never a juror** in their own decision dispute.
+
+***
+
+#### Jurors
+
+Independent participants selected through randomized assignment.
+
+Jurors:
+
+* evaluate the proposal according to the dispute rules,
+* vote independently,
+* and are economically incentivized to act coherently.
+
+Jurors are not influenced by the proposer and have no special privileges.
+
+***
+
+### Decision Outcomes
+
+Decision disputes produce one of the following outcomes:
+
+#### Accept
+
+The proposal is considered valid and acceptable.
+
+The protocol executes the accepted action or records the decision accordingly.
+
+***
+
+#### Reject
+
+The proposal is considered invalid, poorly defined, or unsuitable for evaluation.
+
+Reject does **not** mean:
+
+> “refund the proposer”
+
+Reject means:
+
+> “the proposal should not be accepted in its current form.”
+
+In this case, the proposer’s bond is used to:
+
+* compensate jurors,
+* and cover protocol costs.
+
+This mechanism discourages biased, low-quality, or malformed proposals without giving proposers special influence.
+
+***
+
+### Bond Mechanism
+
+The proposer deposits a bond when opening a decision dispute.
+
+The bond serves to:
+
+* discourage spam or biased proposals,
+* align incentives between proposers and jurors,
+* and compensate jurors in case of rejection.
+
+If:
+
+* no clear majority is reached,
+* or a rejection threshold is met,
+
+the bond may be redistributed according to the dispute rules.
+
+***
+
+### Dispute Flow (High Level)
+
+1. The proposer submits a proposal and deposits a bond.
+2. Jurors are assigned to the dispute.
+3. Jurors evaluate the proposal and vote.
+4. The protocol determines the outcome.
+5. The result is executed automatically on-chain.
+
+All steps follow predefined rules enforced by smart contracts.
+
+***
+
+### Guarantees
+
+Decision disputes in Justly provide:
+
+* **Impartial evaluation**: proposers do not influence voting.
+* **Economic discipline**: bonds discourage malformed proposals.
+* **Transparent execution**: outcomes are enforced on-chain.
+* **Predictable structure**: decision rules are defined upfront.
+
+Justly does not interpret proposals or intervene in decisions.
+
+***
+
+### Status
+
+**Planned**
+
+Decision disputes are part of the core protocol design and will be introduced in a future implementation phase.

@@ -1,68 +1,72 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "Mint Starter Kit",
+  "name": "Justly Docs",
   "colors": {
-    "primary": "#16A34A",
-    "light": "#07C983",
-    "dark": "#15803D"
+    "primary": "#8C8FFF",
+    "light": "#A3A6FF",
+    "dark": "#1B1C23"
   },
   "favicon": "/favicon.svg",
   "navigation": {
     "tabs": [
       {
-        "tab": "Guides",
+        "tab": "Docs",
         "groups": [
           {
-            "group": "Getting started",
+            "group": "Overview",
             "pages": [
               "index",
-              "quickstart",
-              "development"
+              "overview/dispute-resolution-matters",
+              "overview/ai-optimized-docs",
+              "overview/live-demo-juror-experience",
+              "overview/what-is-justly",
+              "overview/why-justly"
             ]
           },
           {
-            "group": "Customization",
+            "group": "How it works",
             "pages": [
-              "essentials/settings",
-              "essentials/navigation"
+              "how-it-works/dispute-lifecycle",
+              "how-it-works/jurors",
+              "how-it-works/voting-and-incentives",
+              "how-it-works/tiers/what-is-a-tier",
+              "how-it-works/tiers/dispute-tiers",
+              "how-it-works/tiers/which-tier-should-i-choose",
+              "how-it-works/dispute-types/dispute-types",
+              "how-it-works/dispute-types/adversarial-dispute",
+              "how-it-works/dispute-types/decision-dispute",
+              "how-it-works/dispute-types/rating-evaluation"
             ]
           },
           {
-            "group": "Writing content",
+            "group": "Use cases",
             "pages": [
-              "essentials/markdown",
-              "essentials/code",
-              "essentials/images",
-              "essentials/reusable-snippets"
+              "use-cases/overview",
+              "use-cases/marketplaces",
+              "use-cases/freelancer-contractor-platforms",
+              "use-cases/fintech-wallets-payment-platforms",
+              "use-cases/web3-platforms-onchain-protocols",
+              "use-cases/micro-insurance-micro-claims",
+              "use-cases/content-moderation-platform-disputes",
+              "use-cases/code-quality-oss-reward-distribution",
+              "use-cases/governance-collective-decision-making"
             ]
           },
           {
-            "group": "AI tools",
+            "group": "Protocol",
             "pages": [
-              "ai-tools/cursor",
-              "ai-tools/claude-code",
-              "ai-tools/windsurf"
-            ]
-          }
-        ]
-      },
-      {
-        "tab": "API reference",
-        "groups": [
-          {
-            "group": "API documentation",
-            "pages": [
-              "api-reference/introduction"
+              "protocol/security-game-theory",
+              "protocol/security-model",
+              "protocol/protocol-guarantees",
+              "protocol/legal-compliance-considerations",
+              "protocol/current-implementation"
             ]
           },
           {
-            "group": "Endpoint examples",
+            "group": "Reference",
             "pages": [
-              "api-reference/endpoint/get",
-              "api-reference/endpoint/create",
-              "api-reference/endpoint/delete",
-              "api-reference/endpoint/webhook"
+              "reference/frequently-asked-questions"
             ]
           }
         ]
@@ -71,14 +75,9 @@
     "global": {
       "anchors": [
         {
-          "anchor": "Documentation",
-          "href": "https://mintlify.com/docs",
-          "icon": "book-open-cover"
-        },
-        {
-          "anchor": "Blog",
-          "href": "https://mintlify.com/blog",
-          "icon": "newspaper"
+          "anchor": "Website",
+          "href": "https://justly.one",
+          "icon": "globe"
         }
       ]
     }
@@ -91,32 +90,24 @@
     "links": [
       {
         "label": "Support",
-        "href": "mailto:hi@mintlify.com"
+        "href": "mailto:hello@justly.one"
       }
-    ],
-    "primary": {
-      "type": "button",
-      "label": "Dashboard",
-      "href": "https://dashboard.mintlify.com"
-    }
+    ]
   },
   "contextual": {
     "options": [
-     "copy",
-     "view",
-     "chatgpt",
-     "claude",
-     "perplexity",
-     "mcp",
-     "cursor",
-     "vscode"
-   ]
+      "copy",
+      "view",
+      "chatgpt",
+      "claude",
+      "mcp",
+      "cursor",
+      "vscode"
+    ]
   },
   "footer": {
     "socials": {
-      "x": "https://x.com/mintlify",
-      "github": "https://github.com/mintlify",
-      "linkedin": "https://linkedin.com/company/mintlify"
+      "x": "https://x.com/justlyone"
     }
   }
 }

@@ -1,0 +1,145 @@
+---
+title: "Adversarial Dispute"
+description: "Not all conflicts require the same kind of resolution."
+---
+
+Not all conflicts require the same kind of resolution.
+
+Some involve two opposing parties, competing claims, and a need for a clear, enforceable outcome.
+
+**Adversarial disputes** are Justly’s core dispute primitive, designed to resolve these situations through neutral human judgment and on-chain execution.
+
+***
+
+### Overview
+
+An adversarial dispute resolves a conflict between **two opposing parties**:
+
+* a **Claimer**, who initiates the dispute,
+* and a **Defender**, who responds to it.
+
+Both parties:
+
+* submit evidence,
+* deposit a stake,
+* and accept a binding outcome determined by jurors.
+
+A group of independent human jurors evaluates the evidence and votes on the dispute.\
+The final result is executed automatically and verifiably on-chain.
+
+***
+
+### When to use an Adversarial Dispute
+
+Adversarial disputes are suitable when:
+
+* responsibility or fault is contested,
+* the outcome is binary,
+* and a clear winner must be determined.
+
+Typical use cases include:
+
+* marketplaces and peer-to-peer transactions,
+* freelancer and contractor platforms,
+* fintech and payment disputes,
+* protocol-level human arbitration.
+
+***
+
+### Participants
+
+#### Claimer
+
+The party that initiates the dispute.
+
+The claimer is responsible for:
+
+* opening the dispute,
+* submitting evidence,
+* and staking funds according to the selected tier.
+
+***
+
+#### Defender
+
+The party responding to the claim.
+
+The defender:
+
+* submits counter-evidence,
+* matches the required stake,
+* and participates under the same rules as the claimer.
+
+***
+
+#### Jurors
+
+Independent participants selected through randomized assignment.
+
+Jurors:
+
+* review the evidence,
+* vote independently,
+* and are economically incentivized to vote coherently.
+
+Jurors are never parties to the dispute.
+
+***
+
+### Dispute Flow (High Level)
+
+1. The dispute is created by the claimer.
+2. Both parties submit evidence and deposit their stake.
+3. Jurors are assigned to the dispute.
+4. Jurors evaluate the evidence and vote.
+5. The protocol determines the outcome.
+6. Funds and results are executed automatically on-chain.
+
+All steps follow predefined rules enforced by smart contracts.
+
+***
+
+### Appeals
+
+Appeals are **central to adversarial disputes** and one of the most urgent roadmap priorities.
+
+Current live contracts finalize in a single executed round. The next phase introduces additional appeal rounds.
+
+An appeal represents a request for a new evaluation under stricter conditions.
+
+Justly uses a **funding-based appeal model**:
+
+* Only the appealing party is required to pay the cost to open a new round.
+* The non-appealing party may choose to match the stake in order to participate in the appeal round.
+* If the non-appealing party does not match:
+  * they do not automatically lose the case,
+  * but they forfeit the right to earn appeal-related rewards.
+
+This design incentivizes participants to financially support the outcome they believe is correct, without forcing participation or introducing asymmetrical power.
+
+Appeal rounds may involve:
+
+* a higher tier,
+* more jurors,
+* or stronger economic guarantees.
+
+***
+
+### Guarantees
+
+Adversarial disputes in Justly provide:
+
+* **Neutrality**: jurors are independent and randomly assigned.
+* **Economic alignment**: incentives reward coherent voting.
+* **Deterministic execution**: outcomes are enforced by smart contracts.
+* **Predictable structure**: all rules are defined upfront by the protocol.
+
+Justly does not interpret evidence, influence jurors, or intervene in outcomes.
+
+***
+
+### Status
+
+**Live (Current Implementation)**
+
+Adversarial disputes are the primary dispute type supported in the current version of Justly.

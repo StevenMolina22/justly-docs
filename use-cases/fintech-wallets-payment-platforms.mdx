@@ -1,0 +1,161 @@
+---
+title: "Fintechs, Wallets, and Payment Platforms"
+description: "Fintech and payment platforms handle millions of transactions between users who don’t know each other .\ Disputes are not edge cases — they are an inevitab"
+---
+
+<Note>
+Status: Live (Public Adversarial Dispute)
+</Note>
+
+#### The real problem (not a theoretical one)
+
+Fintech and payment platforms handle **millions of transactions between users who don’t know each other**.\
+Disputes are not edge cases — they are an inevitable byproduct of digital payments.
+
+Common real-world scenarios include:
+
+* A user claims *“I sent the payment, but the service was never delivered”*
+* A merchant claims *“the payment was received and the service was provided”*
+* A peer-to-peer transfer is marked as incorrect or unintended
+* A user disputes a charge after receiving a product or service
+* Cross-border payments generate misunderstandings due to timing, FX, or settlement differences
+
+These issues occur **daily**, especially at scale.
+
+***
+
+#### How disputes are handled today (and why this doesn’t scale)
+
+Most fintechs and wallets rely on **centralized dispute handling**:
+
+1. The platform freezes the transaction.
+2. A dispute or chargeback process is initiated.
+3. Internal teams:
+   * review transaction logs,
+   * analyze user communications,
+   * apply internal policies.
+4. The platform decides whether to reverse or settle the payment.
+
+This approach introduces structural problems:
+
+* ❌ **The platform is judge and party**\
+  It controls the funds and the outcome.
+* ❌ **High operational and compliance costs**\
+  Each dispute requires manual review and regulatory oversight.
+* ❌ **Slow resolution times**\
+  Chargebacks and disputes can take days or weeks.
+* ❌ **Limited transparency**\
+  Users don’t understand how or why decisions are made.
+
+As transaction volume grows, these processes become **increasingly expensive and fragile**.
+
+***
+
+#### The key insight: payments without neutral resolution erode trust
+
+Payments are only truly final when users trust the system.
+
+Without a fair dispute mechanism:
+
+* users hesitate to send money,
+* merchants face uncertainty,
+* platforms absorb reputational and financial risk.
+
+Traditional chargeback systems:
+
+* are slow,
+* favor certain parties,
+* and don’t work well for instant or cross-border payments.
+
+👉 **Fast payments require equally fast and fair dispute resolution.**
+
+***
+
+#### How Justly fits into fintech and payment flows
+
+Justly integrates as a **neutral dispute resolution layer on top of payment rails**.
+
+A typical flow:
+
+1. A payment is executed and optionally held in escrow.
+2. A dispute is opened if one party challenges the transaction.
+3. Both sides submit evidence:
+   * transaction details,
+   * service confirmation,
+   * messages or receipts.
+4. **Independent jurors** evaluate the case.
+5. A ruling is reached based on predefined criteria.
+6. Funds are released, refunded, or reassigned automatically.
+
+Justly operates:
+
+* independently from the platform,
+* transparently and on-chain,
+* without replacing existing payment infrastructure.
+
+***
+
+#### A concrete (very realistic) example
+
+**Peer-to-peer payment dispute**
+
+* Amount: 200 USDC
+* Sender claims: *“I paid for a service that was never delivered”*
+* Receiver claims: *“The service was provided as agreed”*
+
+With Justly:
+
+* Both parties submit:
+  * payment proof,
+  * conversation history,
+  * any service confirmation.
+* Jurors assess:
+  * Was the payment conditional?
+  * Was the service delivered?
+* A vote is taken.
+* Funds are reassigned automatically according to the ruling.
+
+The wallet or fintech platform **does not intervene directly**.
+
+***
+
+#### Clear benefits for fintechs and wallets
+
+**For the platform**
+
+* Lower dispute handling and chargeback costs.
+* Reduced regulatory and reputational risk.
+* Transparent, auditable dispute outcomes.
+* Better scalability as transaction volume grows.
+
+**For users**
+
+* Increased confidence when sending payments.
+* Fair handling of payment conflicts.
+
+**For merchants and recipients**
+
+* Protection against abusive chargebacks.
+* Predictable, rule-based outcomes.
+
+***
+
+#### Why this matters
+
+Without effective dispute resolution:
+
+* instant payments feel risky,
+* user trust declines,
+* platforms become bottlenecks.
+
+With Justly:
+
+* disputes become structured and manageable,
+* trust scales with transaction volume,
+* payment systems remain fast without sacrificing fairness.
+
+***
+
+*Payment-related disputes are usually resolved using **Tier 1 or Tier 2**, prioritizing speed and predictable resolution times.*
+
+See [Dispute tiers](/how-it-works/tiers/dispute-tiers).
