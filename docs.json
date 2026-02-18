@@ -59,8 +59,9 @@
               "protocol/security-game-theory",
               "protocol/security-model",
               "protocol/protocol-guarantees",
-              "protocol/legal-compliance-considerations",
-              "protocol/current-implementation"
+              "protocol/current-implementation",
+              "protocol/implementing-justly-web3-smart-contracts",
+              "protocol/legal-compliance-considerations"
             ]
           },
           {

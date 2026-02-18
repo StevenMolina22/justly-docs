@@ -1,0 +1,135 @@
+---
+title: "Implementing Justly in Web3 smart contracts"
+description: "Integrate Justly as an arbitrator by implementing a small callback interface and wiring dispute creation, funding, and evidence submission."
+---
+
+This guide explains how your protocol can integrate Justly directly from smart contracts using the arbitrable-arbitrator model.
+
+Your contract keeps custody of the principal assets. Justly resolves the dispute and returns a ruling. Your contract enforces the final state change.
+
+***
+
+#### Integration model
+
+Use a push model:
+
+* Your arbitrable contract owns escrowed funds, locked positions, or claimable balances.
+* Your contract opens a dispute in Justly when an edge case appears.
+* Justly runs the dispute lifecycle and returns `rule(disputeId, ruling)`.
+* Your contract executes the ruling by releasing, refunding, or reallocating funds.
+
+This keeps your core protocol logic in your contract while outsourcing dispute judgment to Justly.
+
+***
+
+#### Minimal interfaces
+
+Define and depend on interfaces, not concrete implementations, so your integration remains stable if internal protocol contracts evolve.
+
+```solidity
+interface IArbitrable {
+    function rule(uint256 disputeId, uint256 ruling) external;
+}
+
+interface IJustly {
+    struct CreateDisputeParams {
+        address claimer;
+        address defender;
+        string category;
+        string ipfsHash;
+        uint256 jurorsRequired;
+        uint256 paySeconds;
+        uint256 evidenceSeconds;
+        uint256 commitSeconds;
+        uint256 revealSeconds;
+    }
+
+    function createDispute(CreateDisputeParams calldata params) external returns (uint256);
+    function payDispute(uint256 disputeId) external;
+    function submitEvidence(uint256 disputeId, string calldata ipfsHash) external;
+    function getDisputeCost(uint256 disputeId) external view returns (uint256);
+}
+```
+
+Treat this as the minimum surface your protocol needs for dispute integration.
+
+***
+
+#### End-to-end flow
+
+1. **Open dispute from your contract**
+   Create a protocol case, lock relevant assets, then call `createDispute(...)`.
+2. **Fund dispute**
+   The claimer and defender can each call `payDispute(disputeId)`. Your arbitrable contract can also fund both sides when your product model requires single-transaction UX.
+3. **Submit evidence**
+   Parties submit evidence references through `submitEvidence(disputeId, ipfsHash)`.
+4. **Wait for ruling**
+   Justly handles juror assignment, voting, reveal, and settlement internally.
+5. **Receive callback and enforce**
+   Justly calls `rule(disputeId, ruling)` on your contract. Your contract applies deterministic enforcement logic.
+
+***
+
+#### Ruling semantics
+
+At the integration layer, treat the ruling as binary:
+
+* `0`: defender wins
+* `1`: claimer wins
+
+Your contract should map this result to protocol actions, such as:
+
+* release escrow to one side,
+* split according to pre-defined terms,
+* or cancel and refund.
+
+Keep this mapping explicit in your state machine.
+
+***
+
+#### Evidence strategy
+
+Store only compact references on-chain.
+
+Recommended approach:
+
+* put the root case file in `createDispute(..., ipfsHash, ...)`,
+* append additional evidence over time with `submitEvidence(...)`,
+* keep your own case metadata keyed by `disputeId` in your contract or indexer.
+
+This gives you low gas overhead and an auditable evidence timeline.
+
+***
+
+#### Security and implementation checklist
+
+* Restrict `rule(...)` so only the Justly arbitrator address can call it.
+* Make ruling execution idempotent. A dispute should not settle twice.
+* Track `protocolCaseId -> disputeId` and `disputeId -> protocolCaseId` mappings.
+* Lock disputed assets before opening a dispute.
+* Validate party roles before forwarding calls to `payDispute(...)` and `submitEvidence(...)`.
+* Emit protocol-level events for dispute opened, funded, evidence submitted, and ruling applied.
+
+***
+
+#### Practical integration pattern
+
+A production integration usually keeps three layers:
+
+* **Protocol contract**: escrow and final enforcement.
+* **Arbitration adapter**: thin wrapper that talks to Justly interfaces.
+* **Indexer/back end**: evidence UX, timeline, notifications, and analytics.
+
+This separation keeps your on-chain core small while preserving a full product experience.
+
+***
+
+#### What to version-pin
+
+To protect your integration from contract changes:
+
+* pin the deployed arbitrator address per chain,
+* pin the ABI version your adapter uses,
+* keep interfaces in your repo and upgrade through explicit release steps.
+
+This lets you evolve safely while preserving deterministic enforcement for users.
