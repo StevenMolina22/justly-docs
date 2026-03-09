@@ -1,6 +1,6 @@
 ---
 title: "Voting and Incentives"
-description: "Justly uses an incentive driven voting system designed to align honest human judgment with economic outcomes."
+description: "Justly uses commit-reveal voting and tier-defined incentives to align honest human judgment with economic outcomes."
 ---
 
 <Note>
@@ -15,7 +15,7 @@ Instead, it relies on structured human voting combined with economic incentives 
 
 ***
 
-#### Independent Juror Participation
+#### Independent juror participation
 
 Jurors participate independently in each dispute and are evaluated economically on outcome coherence.
 
@@ -23,18 +23,16 @@ Staking aligns incentives by creating meaningful upside for coherent decisions a
 
 ***
 
-#### Commit–Reveal Voting
+#### Commit-reveal voting
 
-Justly uses a **commit–reveal** voting scheme to protect the integrity of the voting process.
-
-Roadmap: integrate Shutter's API for encrypted commit–reveal with automatic reveal to reduce juror UX friction and improve liveness.
+Justly uses a **commit-reveal** voting scheme to protect the integrity of the voting process.
 
 The process is divided into two phases:
 
 * **Commit phase**:\
-  Jurors submit a cryptographic commitment to their vote without revealing its value.
+  Selected jurors submit a cryptographic commitment to their vote without revealing its value.
 * **Reveal phase**:\
-  Jurors reveal their vote, which is verified against the original commitment.
+  Jurors reveal the vote associated with their commitment.
 
 This mechanism:
 
@@ -42,19 +40,28 @@ This mechanism:
 * encourages independent decision-making,
 * and protects jurors from external pressure.
 
-The protocol enforces this process automatically and uniformly across all disputes, regardless of tier.
+The protocol enforces this process uniformly across disputes.
+Shutter-based reveal automation is planned to make the reveal step feel closer to a single-step flow while preserving the same architecture.
 
 ***
 
-#### Coherent Voting
+#### Finalization rule
 
-After all votes are revealed, the protocol determines the final outcome based on the collective decision of the jurors.
+The dispute finalizes when either:
+
+* all effective votes have been revealed, or
+* the voting deadline passes.
+
+If no effective vote exists, the defender is the default outcome.
+
+***
+
+#### Coherent voting
+
+After the valid reveals are counted, the protocol determines the final outcome based on the jurors' votes.
 
 Jurors are considered to have voted **coherently** if their vote aligns with the final outcome.
-
-Coherent voting is the primary signal used by the protocol to distribute rewards and penalties.
-
-Coherence is evaluated exclusively against the final collective outcome, not against external or subjective notions of correctness.
+Coherence is evaluated against the collective result of the dispute, not against an external notion of correctness.
 
 ***
 
@@ -64,23 +71,23 @@ Jurors who vote coherently are rewarded.
 
 Rewards are sourced from:
 
-* the stakes of jurors who voted incoherently,
-* and predefined dispute fees, depending on the tier.
+* predefined dispute fees,
+* and penalties applied to incoherent participation.
 
 Rewards are distributed automatically and proportionally according to protocol rules.
-
-Reward distribution follows deterministic protocol rules and does not involve discretionary judgment.
 
 ***
 
 #### Penalties
 
-Jurors who vote against the final outcome are penalized.
+Jurors who vote incoherently are penalized.
 
 Penalties may include:
 
-* partial or total loss of the juror’s stake,
-* depending on the dispute type and selected tier.
+* partial or total loss of the juror's stake,
+* depending on the tier and dispute configuration.
+
+Non-participation after selection is treated as incoherence.
 
 This mechanism discourages:
 
@@ -88,11 +95,9 @@ This mechanism discourages:
 * low-effort participation,
 * and strategic manipulation.
 
-Penalty application is automatic and applies equally to all jurors under the same dispute conditions.
-
 ***
 
-#### Incentive Alignment
+#### Incentive alignment
 
 The voting and incentive system is designed so that:
 
@@ -102,11 +107,9 @@ The voting and incentive system is designed so that:
 
 Over time, this creates a juror pool that is economically aligned with fair and reliable dispute resolution.
 
-This mechanism allows the juror pool to self-regulate over time without centralized reputation scoring.
-
 ***
 
-#### Automatic Enforcement
+#### Automatic enforcement
 
 All rewards, penalties, and fund transfers are enforced automatically by smart contracts.
 
@@ -118,4 +121,4 @@ This ensures:
 * transparency,
 * and neutrality across all disputes.
 
-> Once executed, outcomes cannot be altered or overridden.
+> Once finalized, outcomes cannot be altered or overridden.

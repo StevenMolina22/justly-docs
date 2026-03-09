@@ -1,116 +1,133 @@
 ---
 title: "Dispute Lifecycle"
-description: "Every dispute in Justly follows a deterministic, transparent lifecycle designed to ensure fairness, incentive alignment, and automatic execution."
+description: "Every dispute in Justly follows a compact five-state lifecycle with bounded deadlines, frozen evidence before voting, and finality independent from callback execution."
 ---
 
-Every dispute in Justly follows a deterministic, transparent lifecycle designed to ensure fairness, incentive alignment, and automatic execution.
+Every dispute in Justly follows a deterministic five-state lifecycle.
 
-While specific parameters may vary depending on the tier or dispute type, the overall structure of the process remains consistent across the protocol.
+While tiers may change economic values and timing ranges, the state machine stays the same across the protocol.
 
 ***
 
-#### 1. Dispute Creation
+#### State model
 
-A dispute begins when a party (the **Claimer**) initiates a case against another party (the **Defender**).
+Every dispute moves through these states:
+
+1. `Created`
+2. `Evidence`
+3. `Commit`
+4. `Reveal`
+5. `Finished`
+
+This model stays intentionally compact. Operational steps such as juror assignment happen inside a state rather than as separate states.
+
+***
+
+#### 1. `Created`
+
+A dispute starts in `Created` when the integrating protocol opens a case between a **Claimer** and a **Defender**.
 
 At creation time:
 
-* the dispute parameters are defined,
-* the applicable tier is selected,
-* and the dispute becomes available for participation.
+* the parties are defined,
+* the tier is selected,
+* the evidence reference can be set,
+* and timing parameters are initialized.
 
-From this point forward, the dispute is governed entirely by protocol rules.
-
-***
-
-#### 2. Stake Deposit
-
-Both the Claimer and the Defender are required to deposit the stake defined by the selected tier.
-
-This stake:
-
-* signals commitment to the process,
-* prevents frivolous or spam disputes,
-* and ensures that both parties have economic exposure to the outcome.
-
-If the required stakes are not deposited within the allowed time window, the dispute does not proceed.
+The dispute exists, but adjudication has not started yet.
 
 ***
 
-#### 3. Evidence Submission
+#### 2. Funding and activation
 
-Once the dispute is funded, both parties may submit evidence supporting their position.
+Both sides of the dispute must be fully funded before the dispute can activate.
 
-Evidence is:
+This means the required economic amounts for the claimer side and defender side must be covered. Those amounts may be paid by the parties themselves or by a sponsor or platform on their behalf.
 
-* submitted off-chain,
-* cryptographically referenced on-chain,
-* and made available to all assigned jurors.
+Until both sides are covered, the dispute remains in `Created`.
 
-The protocol does not interpret evidence.\
-It only guarantees that evidence is immutable and equally accessible.
+Once full funding is complete, the dispute moves to `Evidence`.
 
 ***
 
-#### 4. Juror Assignment
+#### 3. `Evidence`
 
-A set of jurors is assigned to the dispute according to the rules defined by the selected tier.
+In `Evidence`, the funded dispute is open for evidence submission.
 
-Juror assignment:
+During this phase:
 
-* is randomized,
-* is independent from the disputing parties,
-* and ensures the dispute reaches the required number of jurors.
+* the parties can submit evidence references,
+* evidence stays off-chain,
+* evidence references are recorded on-chain,
+* and the record that jurors will later evaluate is formed.
 
-Jurors must deposit their own stake in order to participate.
+Evidence is only accepted during its allowed window.
+When the evidence window closes, the dispute moves to `Commit` and the record is frozen.
 
 ***
 
-#### 5. Commit Phase
+#### 4. `Commit`
 
-During the commit phase, each juror submits a cryptographic commitment to their vote.
+`Commit` is the start of adjudication.
+
+At this point:
+
+* evidence is frozen,
+* the voting timer starts,
+* juror assignment begins,
+* and selected jurors can submit vote commitments.
+
+Juror selection is permissionless to trigger.
+If the full target panel is not reached before the selection timeout, the dispute still proceeds with the jurors actually selected.
+
+***
+
+#### 5. `Reveal`
+
+In `Reveal`, jurors who committed votes reveal them.
 
 This phase:
 
-* prevents vote copying or coordination,
-* ensures jurors make independent decisions,
-* and protects the integrity of the voting process.
+* verifies commitments,
+* counts valid reveals,
+* and allows the dispute to reach finalization.
 
-Votes are not visible during this phase.
+The dispute finalizes when either:
 
-***
+* all effective votes have been revealed, or
+* the voting deadline passes.
 
-#### 6. Reveal Phase
-
-In the reveal phase, jurors reveal their previously committed votes.
-
-The protocol verifies that each revealed vote matches its original commitment.
-
-Once all required votes are revealed — or the reveal period expires — the dispute moves to resolution.
+If no effective vote exists, the defender is the default outcome.
 
 ***
 
-#### 7. Resolution and Execution
+#### 6. `Finished`
 
-After the voting phase concludes, the protocol determines the outcome based on juror votes.
+In `Finished`, the ruling is final at the protocol level.
 
-The result is:
+At finalization, Justly:
 
-* final for the current dispute,
-* enforced automatically by smart contracts,
-* and executed without human intervention.
+* stores the final ruling,
+* computes juror rewards and penalties,
+* and may attempt a callback to the integrating protocol.
 
-This includes:
-
-* redistribution of stakes between the parties,
-* rewards and penalties for jurors,
-* and the final settlement of the dispute.
+Callback success is not required for ruling finality.
 
 ***
 
-#### Finality
+#### Key guarantees
 
-In the current implementation, dispute outcomes are final once executed.
+The lifecycle guarantees that:
+
+* a dispute cannot enter adjudication before both sides are fully funded,
+* evidence is frozen before voting begins,
+* progression is bounded by deadlines,
+* a dispute can finalize with fewer jurors than the target panel,
+* and callback failure does not invalidate the ruling.
+
+***
+
+#### Notes on versions
 
 Appeals are central to Justly's long-term security model and are one of the most urgent roadmap priorities.
 Future iterations will introduce structured appeal rounds and additional resolution layers.

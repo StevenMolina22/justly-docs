@@ -1,9 +1,9 @@
 ---
 title: "Dispute Tiers"
-description: "Each tier defines a fixed set of parameters that determine the security level , economic cost , and robustness of the dispute resolution process."
+description: "Each tier defines the juror panel target, juror stake levels, and dispute-side funding amounts exposed to integrators."
 ---
 
-Each tier defines a fixed set of parameters that determine the **security level**, **economic cost**, and **robustness** of the dispute resolution process.
+Each tier defines a dispute profile with a specific balance of **security level**, **economic cost**, and **resolution speed**.
 
 | Tier       | Jurors   | Stake per Juror | Stake per Party (Claimer / Defender) | Fixed Fee\* | Security Level |
 | ---------- | -------- | --------------- | ------------------------------------ | ----------- | -------------- |
@@ -16,10 +16,11 @@ Each tier defines a fixed set of parameters that determine the **security level*
 
 ***
 
-#### **Important Notes**
+#### Important notes
 
-* All values are expressed in USD (or equivalent stablecoins).
-* Tier values are target profiles for standardized configurations.
-* Live deployments may use court/category configurations while preserving the same economic principles.
+* All values are expressed in USD, or equivalent stablecoins.
+* Both sides of the dispute must be fully funded before the dispute activates.
+* Tier values are the public-facing profiles exposed to platforms and integrators.
+* Internal protocol configuration may still map these tiers to court or category settings while preserving the same economics.
 * Higher tiers increase the cost of attacks, the diversity of judgment, and the overall robustness of the outcome.
-* Selecting a tier allows the parties to choose a security level proportional to the value or complexity of the dispute.
+* Selecting a tier allows a platform to choose a security level proportional to the value or complexity of the dispute.

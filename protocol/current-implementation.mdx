@@ -1,28 +1,30 @@
 ---
 title: "Current Implementation"
-description: "The following section describes the scope of the current MVP implementation. Other sections of the documentation describe the full Justly protocol design b"
+description: "This page describes what is live in Justly today and how it differs from features planned for later versions."
 ---
 
-The following section describes the scope of the current MVP implementation. Other sections of the documentation describe the full Justly protocol design beyond the current implementation.
+This page describes the current live implementation.
+Other pages may describe later-version features, but this page is the reference for what is live today.
 
 #### Scope
 
 The current implementation focuses on validating the core mechanics of Justly:
 
 * Human juries
-* Economic incentives based on game theory
-* Automated on-chain execution
-* Fast and reliable dispute resolution for low-to-medium value conflicts
+* Commit-reveal voting
+* Tier-based dispute configuration
+* Automated on-chain finalization
+* Fast and bounded dispute resolution for online conflicts
 
-All features outside this scope are intentionally excluded from the MVP and will be introduced in future phases.
+All features outside this scope are intentionally excluded from the current version and will be introduced in later versions.
 
 ***
 
 #### Supported Dispute Type
 
-**Public Adversarial Dispute**
+**Public adversarial dispute**
 
-The MVP supports **public adversarial disputes** between two parties:
+The live version supports **public adversarial disputes** between two parties:
 
 * **Claimer**: the party initiating the dispute
 * **Defender**: the counterparty
@@ -30,35 +32,32 @@ The MVP supports **public adversarial disputes** between two parties:
 Both parties:
 
 * submit evidence,
-* stake funds,
+* must have their side of the dispute fully funded,
 * and accept the outcome enforced by the protocol.
+
+Those required amounts may be paid by the parties themselves or by a sponsor or platform on their behalf.
 
 The dispute is resolved by a group of anonymous human jurors.
 
 ***
 
-#### Dispute Lifecycle
+#### Dispute lifecycle
 
-Each dispute follows a deterministic, on-chain lifecycle:
+Each dispute follows a deterministic on-chain lifecycle:
 
-1. **Dispute Creation**\
-   A dispute is created by the claimer, specifying the counterparty and dispute parameters.
-2. **Funding & Evidence Submission**\
-   Both parties deposit the required stake and submit evidence (off-chain, referenced on-chain).
-3. **Juror Assignment**\
-   Jurors are selected and assigned to the dispute.
-4. **Commit Phase**\
-   Jurors commit their votes using a commit–reveal scheme.
-5. **Reveal Phase**\
-   Jurors reveal their votes.
-6. **Resolution & Execution**\
-   The protocol determines the winning side and automatically executes:
-   * fund redistribution,
-   * juror rewards,
-   * and penalties.
+1. **`Created`**\
+   The dispute is created with the parties, tier, and timing parameters.
+2. **`Evidence`**\
+   Once both sides are fully funded, evidence submission opens.
+3. **`Commit`**\
+   Evidence is frozen, juror assignment starts, and selected jurors submit commitments.
+4. **`Reveal`**\
+   Jurors reveal committed votes.
+5. **`Finished`**\
+   The ruling is finalized, incentives are settled, and an optional callback may be attempted.
 
-Current implementation: once executed, the outcome is final.
-Roadmap priority: add appeal rounds as a first-class escalation mechanism.
+Current implementation: once finalized, the outcome is final.
+Later version: appeals add escalation rounds as a first-class escalation mechanism.
 
 ***
 
@@ -68,81 +67,81 @@ Roadmap priority: add appeal rounds as a first-class escalation mechanism.
 * Identity and anti-Sybil layers are part of the broader roadmap.
 * Jurors are pseudonymous to disputing parties.
 * Jurors must stake funds to participate.
+* Stake size influences selection economics, but rulings are not stake-weighted.
 
 ***
 
-#### Matchmaking
+#### Liveness and assignment
 
-Justly uses coordination mechanisms to improve liveness and operational reliability. This coordination is designed to:
+Justly is designed to keep disputes moving toward finalization even when juror participation is imperfect.
 
-* reduce stalled or abandoned disputes,
-* improve timing predictability for platforms and users,
-* and adapt to available juror liquidity.
+This means:
 
-Juror selection remains randomized and independent, and outcome execution remains on-chain.
+* juror assignment begins when `Commit` starts,
+* the dispute can proceed with fewer selected jurors than the target panel,
+* and finalization remains bounded by the voting deadlines.
 
-Operational timing is most predictable when juror liquidity is healthy in the relevant court/category.
-Longer windows remain in place as safety buffers for periods of lower participation.
+Selection details may evolve over time, but these liveness guarantees remain part of the architecture.
 
 ***
 
-#### Voting & Security
+#### Voting and security
 
 * Voting is executed **fully on-chain**.
-* A **commit–reveal scheme** is used to prevent vote manipulation.
-* Roadmap: integrate Shutter's API to support encrypted commit–reveal with automatic reveal.
+* A **commit-reveal scheme** is used to prevent vote manipulation.
+* Shutter-based reveal automation is planned to improve juror UX while preserving the same protocol flow.
 * All state transitions and outcomes are verifiable on-chain.
 
 ***
 
 #### Tiers
 
-Roadmap: Justly introduces standardized dispute tiers.
-
-Current implementation: disputes are configured through courts/categories and dispute parameters.
+Tiers are the public-facing dispute profiles exposed to platforms and integrators.
+They package the main economic and procedural values a platform cares about, such as juror stake amounts and arbitration fees.
 
 Each tier defines:
 
 * number of jurors,
 * juror stake requirements,
-* party stake requirements,
-* fixed fees and protocol fees.
+* party-side funding requirements,
+* and arbitration fee levels.
 
-Tiers allow the protocol to support different levels of dispute complexity and economic risk while maintaining predictable resolution behavior.
+Internally, live deployments may still map tiers to court or category configuration.
+For integrators, tiers remain the simpler abstraction.
 
 ***
 
 #### Economics
 
-* Both disputing parties stake funds to participate.
+* Both sides of the dispute must be fully funded before activation.
 * Jurors stake funds to vote.
 * Jurors who vote coherently are rewarded.
-* Jurors who vote against the final outcome lose their stake.
-* The protocol charges a fixed fee per dispute and a percentage of the losing juror pool.
+* Jurors who vote incoherently, or fail to complete participation, are penalized according to protocol rules.
+* Tier parameters define the main fee and stake values exposed to integrators.
 
 All economic flows are enforced automatically by smart contracts.
 
 ***
 
-#### Limitations of the Current Implementation
+#### Limitations of the current implementation
 
 The following features are **not included** in the current implementation:
 
 * Appeals or dispute escalation
-* Private disputes
 * Rating or decision-based disputes
 * Automatic reveal via Shutter API integration
 
-These features are part of the Justly protocol design and will be introduced in future phases.
+These features are planned for later versions.
+The live version today is focused on adversarial disputes with a single finalized round.
 
 ***
 
-#### Design Philosophy
+#### Design philosophy
 
 The current implementation prioritizes:
 
 * correctness over completeness,
-* reliability
+* reliability,
 * and enforceable outcomes over subjective mediation.
 
-This approach allows Justly to validate its core assumptions while preserving a clear path toward progressive decentralization and additional dispute types.
+This approach allows Justly to validate its core assumptions while preserving a clear path toward later-version features.

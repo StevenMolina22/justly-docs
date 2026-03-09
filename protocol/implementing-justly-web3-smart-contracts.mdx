@@ -1,6 +1,6 @@
 ---
 title: "Implementing Justly in Web3 smart contracts"
-description: "Integrate Justly as an arbitrator by implementing a small callback interface and wiring dispute creation, funding, and evidence submission."
+description: "Integrate Justly as an arbitrator by wiring dispute creation, funding, evidence submission, and ruling consumption through callback or direct reads."
 ---
 
 This guide explains how your protocol can integrate Justly directly from smart contracts using the arbitrable-arbitrator model.
@@ -13,10 +13,10 @@ Your contract keeps custody of the principal assets. Justly resolves the dispute
 
 Use a push model:
 
-* Your arbitrable contract owns escrowed funds, locked positions, or claimable balances.
-* Your contract opens a dispute in Justly when an edge case appears.
-* Justly runs the dispute lifecycle and returns `rule(disputeId, ruling)`.
-* Your contract executes the ruling by releasing, refunding, or reallocating funds.
+* your arbitrable contract owns escrowed funds, locked positions, or claimable balances,
+* your contract opens a dispute in Justly when an edge case appears,
+* Justly runs the dispute lifecycle and finalizes a ruling,
+* and your contract consumes that ruling through callback handling or direct reads.
 
 This keeps your core protocol logic in your contract while outsourcing dispute judgment to Justly.
 
@@ -57,16 +57,16 @@ Treat this as the minimum surface your protocol needs for dispute integration.
 
 #### End-to-end flow
 
-1. **Open dispute from your contract**
+1. **Open dispute from your contract**\
    Create a protocol case, lock relevant assets, then call `createDispute(...)`.
-2. **Fund dispute**
-   The claimer and defender can each call `payDispute(disputeId)`. Your arbitrable contract can also fund both sides when your product model requires single-transaction UX.
-3. **Submit evidence**
-   Parties submit evidence references through `submitEvidence(disputeId, ipfsHash)`.
-4. **Wait for ruling**
-   Justly handles juror assignment, voting, reveal, and settlement internally.
-5. **Receive callback and enforce**
-   Justly calls `rule(disputeId, ruling)` on your contract. Your contract applies deterministic enforcement logic.
+2. **Fund dispute**\
+   Both sides of the dispute must be covered before activation. The parties can fund their own side, and a platform or sponsor can cover one or both sides when your product model requires it.
+3. **Submit evidence**\
+   Parties submit evidence references through `submitEvidence(disputeId, ipfsHash)` during the evidence window.
+4. **Wait for ruling**\
+   Justly handles evidence freeze, voting, reveal, and settlement internally.
+5. **Consume the ruling**\
+   Your integration can receive a callback through `rule(disputeId, ruling)` or read the final ruling directly.
 
 ***
 
@@ -77,13 +77,29 @@ At the integration layer, treat the ruling as binary:
 * `0`: defender wins
 * `1`: claimer wins
 
+If no effective vote exists at finalization, the defender is the default outcome.
+
 Your contract should map this result to protocol actions, such as:
 
 * release escrow to one side,
-* split according to pre-defined terms,
+* split according to predefined terms,
 * or cancel and refund.
 
 Keep this mapping explicit in your state machine.
+
+***
+
+#### Callback and direct reads
+
+Callback is optional from the perspective of finality.
+
+That means:
+
+* a successful callback can notify your contract immediately,
+* a direct read can be used as a fallback or primary integration mode,
+* and callback failure does not invalidate the ruling.
+
+Your integration should account for this separation between dispute finality and external settlement handling.
 
 ***
 
@@ -94,7 +110,7 @@ Store only compact references on-chain.
 Recommended approach:
 
 * put the root case file in `createDispute(..., ipfsHash, ...)`,
-* append additional evidence over time with `submitEvidence(...)`,
+* append additional evidence during the evidence window with `submitEvidence(...)`,
 * keep your own case metadata keyed by `disputeId` in your contract or indexer.
 
 This gives you low gas overhead and an auditable evidence timeline.

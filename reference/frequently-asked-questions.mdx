@@ -41,13 +41,15 @@ It is not a court and does not provide legal advice. It enforces outcomes based 
 
 <summary>What kinds of disputes is Justly built for?</summary>
 
-Justly is optimized for **micro-to-medium disputes** in digital platforms, where:
+The current version of Justly is optimized for **adversarial disputes** in digital platforms, where:
 
 * disputes are frequent,
 * amounts are not large enough for traditional legal processes,
 * and fast resolution matters.
 
-Examples include marketplaces, freelance platforms, fintech/payment conflicts, governance validation, and quality evaluation.
+Examples include marketplaces, freelancer platforms, and fintech or payment conflicts.
+
+Governance validation and quality evaluation are planned for later versions, not the current implementation.
 
 (See: *Use Cases*)
 
@@ -67,13 +69,19 @@ No. Justly is designed to be **chain-agnostic**, although it may prioritize spec
 
 <summary>What is a Tier?</summary>
 
-A tier defines the **security level and economic parameters** of a dispute: number of jurors, required stakes, and overall robustness.
+A tier is the **public-facing dispute profile** exposed to platforms and integrators.
+
+It packages values such as:
+
+* number of jurors,
+* juror stake levels,
+* and the arbitration fee amounts required for each side of the dispute.
 
 Higher tiers increase the cost of manipulation by combining:
 
 * more jurors,
 * higher stakes,
-* higher total cost to attack.
+* and higher total attack cost.
 
 (See: *What is a Tier*)
 
@@ -85,11 +93,11 @@ Higher tiers increase the cost of manipulation by combining:
 
 Resolution time depends on:
 
-* tier (number of jurors),
-* evidence/voting windows,
-* and juror availability.
+* the selected tier,
+* the evidence and voting windows,
+* and actual juror participation.
 
-Justly is designed to keep dispute resolution **predictable and reliable**, prioritizing liveness and completion.
+Justly is designed to keep dispute resolution **predictable and bounded**, prioritizing liveness and completion.
 
 (See: *Dispute Lifecycle*)
 
@@ -99,11 +107,13 @@ Justly is designed to keep dispute resolution **predictable and reliable**, prio
 
 <summary>What happens after the dispute is resolved?</summary>
 
-Once the dispute is resolved, the outcome is **executed automatically on-chain**:
+Once the dispute is finalized, the outcome is enforced at the protocol level:
 
-* funds are redistributed according to the ruling,
+* the ruling is stored,
 * juror incentives are settled programmatically,
 * and the final state becomes publicly verifiable.
+
+If the integration uses a callback, Justly may attempt it after finalization. Callback failure does not invalidate the ruling.
 
 </details>
 
@@ -113,22 +123,9 @@ Once the dispute is resolved, the outcome is **executed automatically on-chain**
 
 <summary>Are jurors anonymous?</summary>
 
-Jurors are pseudonymous participants, but Justly can require **Proof-of-Humanity (PoH)** to prevent sybil attacks.
+Jurors are pseudonymous participants from the perspective of the disputing parties.
 
-This means jurors can remain private while still proving they are unique humans.
-
-</details>
-
-<details>
-
-<summary>Why require Proof-of-Humanity (PoH)?</summary>
-
-Without PoH, a malicious actor could create many identities and try to influence outcomes.
-
-PoH increases security by ensuring:
-
-* one human = one juror identity,
-* and the economic cost to manipulate results becomes substantially higher.
+This helps preserve neutrality while allowing jurors to participate economically through staking.
 
 </details>
 
@@ -144,14 +141,11 @@ This avoids conflicts of interest and preserves neutrality.
 
 <details>
 
-<summary>What if jurors don’t vote or go inactive?</summary>
+<summary>What if jurors don't vote or go inactive?</summary>
 
 Jurors are expected to participate within defined time windows.
 
-Non-participation can result in:
-
-* losing the chance to earn rewards,
-* and protocol-defined penalties depending on the rules of the dispute.
+Non-participation after selection is treated as incoherence and can result in protocol-defined penalties.
 
 </details>
 
@@ -159,14 +153,15 @@ Non-participation can result in:
 
 <details>
 
-<summary>Can someone “whale” attack Justly by staking a lot?</summary>
+<summary>Can someone "whale" attack Justly by staking a lot?</summary>
 
 Stakes affect:
 
 * economic exposure,
-* and rewards/penalties.
+* selection economics,
+* and rewards or penalties.
 
-Large stakes increase financial exposure, but do not create special control over final execution rules.
+Large stakes increase financial exposure, but do not create special control over the final ruling.
 
 (See: *Security Model*)
 
@@ -176,11 +171,11 @@ Large stakes increase financial exposure, but do not create special control over
 
 <summary>Can someone bribe jurors?</summary>
 
-Bribery is made difficult by:
+Bribery is made harder by:
 
 * randomized assignment,
 * pseudonymity,
-* and incentive alignment (jurors who vote incoherently are penalized).
+* and incentive alignment.
 
 Because jurors are not known in advance, targeted bribery becomes harder, and dishonest coordination is economically risky.
 
@@ -192,11 +187,11 @@ Because jurors are not known in advance, targeted bribery becomes harder, and di
 
 <summary>What prevents sybil attacks?</summary>
 
-Justly mitigates sybil attacks through:
+Justly mitigates manipulation through:
 
-* **Proof-of-Humanity (PoH)** eligibility,
+* staking requirements,
 * randomized juror assignment,
-* and economic penalties for incoherent voting.
+* and economic penalties for incoherent participation.
 
 (See: *Security Model*)
 
@@ -204,18 +199,15 @@ Justly mitigates sybil attacks through:
 
 <details>
 
-<summary>Can Justly be fully trustless if matchmaking uses a backend?</summary>
+<summary>Can Justly be fully trustless if operational tooling is used?</summary>
 
-Justly can use **backend-assisted matchmaking** to ensure disputes reach the required number of jurors and resolve reliably.
+Yes. Operational tooling can help trigger actions or improve UX, but it does not determine rulings.
 
-The backend:
+The protocol guarantees remain the same:
 
-* coordinates assignment and timing,
-* but **cannot influence votes, outcomes, or fund execution**.
-
-All rulings and transfers are enforced by smart contracts.
-
-In the long-term, Justly can support multiple modes such as “Turbo” (assisted) and “Pure Randomness” (fully on-chain randomness).
+* juror voting determines the ruling,
+* state transitions and settlements are enforced by smart contracts,
+* and callback failure does not affect finality.
 
 (See: *Security Model*)
 
@@ -227,9 +219,9 @@ In the long-term, Justly can support multiple modes such as “Turbo” (assiste
 
 <summary>Does Justly support appeals?</summary>
 
-Appeals are part of Justly’s protocol design and may be enabled depending on dispute type and implementation phase.
+Not in the current implementation, but will be added soon as a key component of Justly’s protocol design.
 
-In adversarial disputes, appeal rounds can be opened under stricter conditions to increase robustness and security.
+Appeals are planned for a later version.
 
 </details>
 
@@ -244,6 +236,8 @@ In adversarial disputes, Justly follows a funding model where:
 
 This discourages frivolous appeals while keeping escalation possible when needed.
 
+The final funding model for appeals belongs to a later version and is not part of the current implementation.
+
 (See: *Adversarial Dispute*)
 
 </details>
@@ -254,9 +248,9 @@ This discourages frivolous appeals while keeping escalation possible when needed
 
 <summary>Do users need to hold a specific token to use Justly?</summary>
 
-No. Regular users (claimer/defender) do not need to hold a protocol token.
+No. Regular users, such as the claimer and defender, do not need to hold a protocol token.
 
-Justly is designed to work with **standard assets (e.g., stablecoins)** used for stakes and payouts.
+Justly is designed to work with standard assets, such as stablecoins, used for dispute funding and juror stakes.
 
 </details>
 
@@ -266,9 +260,22 @@ Justly is designed to work with **standard assets (e.g., stablecoins)** used for
 
 Not necessarily. Justly can be integrated through direct contract interaction and integration guidelines.
 
-The SDK is planned to simplify and standardize integrations over time.
+The SDK is useful because it can expose tiers and integration flows in a simpler format, but it is not strictly required.
 
 (See: *Current Implementation*)
+
+</details>
+
+<details>
+
+<summary>How does an integration receive the ruling?</summary>
+
+An integrating protocol can consume the ruling in two ways:
+
+* by reading the final ruling directly,
+* or through an optional callback flow.
+
+Callback success is not required for finality.
 
 </details>
 
@@ -278,7 +285,7 @@ The SDK is planned to simplify and standardize integrations over time.
 
 Compliance depends on the integrating platform, jurisdiction, and transaction type.
 
-Justly is neutral infrastructure and can be combined with identity/KYC/AML solutions when required.
+Justly is neutral infrastructure and can be combined with identity, KYC, or AML solutions when required.
 
 (See: *Legal & Compliance Considerations*)
 
@@ -290,7 +297,7 @@ Justly is neutral infrastructure and can be combined with identity/KYC/AML solut
 
 <summary>Who is responsible if a verdict causes economic loss?</summary>
 
-Justly is provided “as-is”.
+Justly is provided "as-is".
 
 Outcomes result from:
 

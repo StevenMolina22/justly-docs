@@ -1,28 +1,31 @@
 ---
 title: "What is a Tier"
-description: "A tier defines the security level, cost, and robustness of a dispute in Justly."
+description: "A tier is the public-facing dispute profile that packages juror stakes, arbitration fees, and panel size for platforms integrating Justly."
 ---
 
-A **tier** defines the **security level, cost, and robustness** of a dispute in Justly.
+A **tier** is the public-facing dispute profile for a Justly case. It defines the **security level, cost, and robustness** of a dispute.
 
-In the current implementation, the same goals are achieved through configurable courts/categories.
-Standardized tier profiles are part of the protocol roadmap.
+It packages the main values a platform or integrator cares about, such as:
+
+* how many jurors are targeted,
+* how much jurors stake,
+* and the arbitration fee amounts required for each side of the dispute.
 
 Tiers allow the protocol to adapt to different types of conflicts by balancing:
 
 * resolution speed,
 * required level of trust,
-* and the economic risk assumed by both parties and jurors.
+* and the economic risk assumed by the parties and jurors.
 
 Each dispute is executed within a specific tier, and all rules of the resolution process are determined by that tier.
 
 ***
 
-### What Changes Between Tiers
+### What changes between tiers
 
-#### 1. Number of Jurors
+#### 1. Number of jurors
 
-Each tier defines how many human jurors participate in resolving a dispute.
+Each tier defines how many human jurors are targeted for a dispute.
 
 * Lower tiers use fewer jurors, enabling faster and lower-cost resolutions.
 * Higher tiers use more jurors, increasing diversity of judgment and reducing the likelihood of biased outcomes.
@@ -31,24 +34,25 @@ A higher number of jurors increases the robustness of the result against individ
 
 ***
 
-#### 2. Stakes
+#### 2. Stakes and fees
 
-Tiers establish the **required stake amounts** for both:
+Tiers establish the economic values for:
 
-* the parties involved in the dispute (claimer and defender),
-* and the jurors participating in the vote.
+* juror stakes,
+* the claimer-side funding requirement,
+* and the defender-side funding requirement.
 
-Higher stakes:
+Each side must be fully funded before the dispute activates.
+
+Higher values:
 
 * increase the cost of malicious behavior,
 * raise the economic commitment of participants,
 * and better align incentives when the value or complexity of the dispute is higher.
 
-Stake determines economic exposure and incentives for participation.
-
 ***
 
-#### 3. Security Level
+#### 3. Security level
 
 The security level of a dispute increases as the tier becomes higher.
 
@@ -66,11 +70,11 @@ Together, these factors make higher tiers more suitable for:
 
 ***
 
-### Tier System Design
+### Tier system design
 
 Tiers do not exist to segment users, but to **offer security options proportional to the risk of a given conflict**.
 
-In the current implementation:
+For integrators, tiers are the main abstraction exposed through the SDK or API.
 
 * tiers are **fixed and predefined by the protocol**,
 * all disputes within the same tier follow exactly the same rules,
